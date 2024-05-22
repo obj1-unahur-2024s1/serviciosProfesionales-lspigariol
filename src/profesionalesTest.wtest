@@ -1,0 +1,31 @@
+import profesionales.*
+
+
+describe "pruebas de profesionales" {
+   const uni = new Universidad(provincia = "bsas", honorariosPorHora = 5000)
+   const profA = new ProfesionalAsociado(universidad = uni)
+   const profv = new ProfesionalVinculado(universidad = uni)
+   const unaPersona = new Persona(provincia = "bsas")
+   const unaEmpresa = new Empresa()
+   const unaInstitucion = new Institucion()
+
+   method initialize(){
+        unaEmpresa.contratar(profA)
+        unaEmpresa.contratar(profv)
+        unaInstitucion.agregarReconocida(uni)
+   }
+
+test "Un profesional vinculado cobra lo que dice su universidad"{
+    assert.equals(5000,profv.honorariosPorHora())
+}
+
+test "la empresa que tiene un profesinal asociado puede atender a una persona de una provincia de bs as"{
+   assert.that(unaEmpresa.puedeSatisfacer(unaPersona))
+
+}
+
+test "la empresa que tiene un profesinal asociado puede atender a una institucion "{
+  assert.that(unaEmpresa.puedeSatisfacer(unaInstitucion))
+}
+
+}
